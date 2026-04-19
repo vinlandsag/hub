@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Kerala Events Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="aesthetic-theme dark-theme">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <header class="glass-header">
+        <div class="header-content">
+            <h1><span class="gradient-text">Kerala</span> Events Hub</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="dashboard.html" class="nav-link active">All Events</a>
+                <a href="my-events.html" class="nav-link">My Events</a>
+                <a href="profile.html" class="nav-link"><i class='bx bx-user-circle'></i> Profile</a>
+                <a href="#" class="nav-link" id="logout-link">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="max-width: 1300px; margin: 0 auto; padding: 2rem;">
+        <!-- Beautiful Welcome Banner -->
+        <section id="user-info" class="glass-card hover-up banner-glow" style="margin-bottom: 3rem; padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; border-left: 4px solid #6366f1; background: linear-gradient(90deg, rgba(99, 102, 241, 0.05) 0%, rgba(255,255,255,0.02) 100%);">
+            <div>
+                <h2 style="font-size: 2.4rem; color: white; margin-bottom: 0.5rem; text-align: left;">Welcome back, <span id="user-name" class="gradient-text">Student</span>! ✨</h2>
+                <p style="color: #94a3b8; font-size: 1.1rem; margin: 0; text-align: left;">Showing latest events happening near <span id="user-college" style="color: white; font-weight: 500;">Your College</span></p>
+            </div>
+            <div class="user-icon-float" style="background: rgba(99, 102, 241, 0.1); min-width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #a855f7; font-size: 2.5rem; border: 1px solid rgba(99, 102, 241, 0.2);">
+                <i class='bx bx-compass'></i>
+            </div>
+        </section>
+
+        <!-- Events Header & Filters -->
+        <div class="filter-wrapper hover-up delay-1" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.5rem;">
+            <h2 style="font-size: 1.6rem; color: white; margin: 0; flex-shrink: 0;"><i class='bx bx-calendar-event' style="color: #a855f7; margin-right: 0.5rem;"></i>Nearby Events</h2>
+            
+            <div class="filter-controls" style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                <div class="search-input-wrapper" style="position: relative;">
+                    <i class='bx bx-search' style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+                    <input type="text" id="filter-location" placeholder="Search location..." style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); color: white; padding: 0.5rem 1rem 0.5rem 2.5rem; border-radius: 50px; outline: none; transition: all 0.3s ease; font-family: inherit;">
+                </div>
+                <div class="select-wrapper" style="position: relative;">
+                    <select id="filter-distance" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); color: white; padding: 0.5rem 2.5rem 0.5rem 1rem; border-radius: 50px; outline: none; cursor: pointer; appearance: none; font-family: inherit;">
+                        <option value="all" style="background: #0f172a; color: white;">Any Distance</option>
+                        <option value="10" style="background: #0f172a; color: white;">&lt; 10 km</option>
+                        <option value="20" style="background: #0f172a; color: white;">&lt; 20 km</option>
+                        <option value="50" style="background: #0f172a; color: white;">&lt; 50 km</option>
+                    </select>
+                    <i class='bx bx-chevron-down' style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #94a3b8; pointer-events: none;"></i>
+                </div>
+                <div class="filter-buttons" style="margin: 0; display: flex; gap: 0.5rem; background: rgba(255,255,255,0.02); padding: 0.4rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.08);">
+                    <button id="filter-all" class="filter-btn active" style="margin: 0; padding: 0.5rem 1.2rem;">All</button>
+                    <button id="filter-hackathon" class="filter-btn" style="margin: 0; padding: 0.5rem 1.2rem;">Hackathons</button>
+                    <button id="filter-workshop" class="filter-btn" style="margin: 0; padding: 0.5rem 1.2rem;">Workshops</button>
+                    <button id="filter-talk" class="filter-btn" style="margin: 0; padding: 0.5rem 1.2rem;">Talks</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Grid -->
+        <section id="events">
+            <div id="events-grid" class="events-grid">
+                <!-- Cards are injected by fetchDashboardEvents() -->
+                <div id="events-loading" style="grid-column: 1/-1; text-align: center; padding: 4rem; color: #94a3b8;">
+                    <i class='bx bx-loader-alt' style="font-size: 2.5rem; display: block; margin-bottom: 1rem; animation: spin 1s linear infinite;"></i>
+                    Loading events from server...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kerala Events Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const API_BASE = window.location.hostname ? `http://${window.location.hostname}:3000` : 'http://localhost:3000';
+
+        // Inject spin animation
+        const styleEl = document.createElement('style');
+        styleEl.textContent = `@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }`;
+        document.head.appendChild(styleEl);
+
+        function checkAuth() {
+            const userData = localStorage.getItem('keralaEventsUser');
+            if (!userData) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return JSON.parse(userData);
+        }
+
+        function buildEventCard(ev) {
+            const typeConfig = {
+                hackathon: { emoji: '🔥', label: 'Hackathon', bg: 'rgba(239,68,68,0.15)', color: '#f87171', border: 'rgba(239,68,68,0.3)' },
+                workshop:  { emoji: '📘', label: 'Workshop',  bg: 'rgba(59,130,246,0.15)', color: '#60a5fa', border: 'rgba(59,130,246,0.3)' },
+                talk:      { emoji: '🎤', label: 'Tech Talk', bg: 'rgba(168,85,247,0.15)', color: '#c084fc', border: 'rgba(168,85,247,0.3)' }
+            };
+            const tc = typeConfig[ev.type] || { emoji: '📅', label: ev.type, bg: 'rgba(100,116,139,0.15)', color: '#94a3b8', border: 'rgba(100,116,139,0.3)' };
+            const dateStr = ev.date ? new Date(ev.date).toLocaleDateString('en-IN', { year:'numeric', month:'long', day:'numeric' }) : 'TBA';
+            const college = ev.college_name || ev.host_college_id;
+            const district = ev.district ? ` · ${ev.district}` : '';
+
+            const div = document.createElement('div');
+            div.className = 'event-card glass-card hover-up';
+            div.dataset.type = ev.type;
+            div.dataset.location = college;
+            div.dataset.distance = '50'; // default — no geo yet
+            div.innerHTML = `
+                <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:1rem;">
+                    <div class="event-badge" style="margin:0;background:${tc.bg};color:${tc.color};border-color:${tc.border};">${tc.emoji} ${tc.label}</div>
+                    <span style="color:#94a3b8;font-size:0.85rem;"><i class='bx bx-map'></i> ${district || 'Kerala'}</span>
+                </div>
+                <h3 style="font-size:1.5rem;margin-bottom:0.3rem;">${ev.title}</h3>
+                <p class="event-college" style="font-size:0.95rem;">📍 ${college}</p>
+                <p class="date" style="margin-top:0.5rem;"><i class='bx bx-calendar'></i> ${dateStr}</p>
+                <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:1rem;margin:1.2rem 0;flex:1;">
+                    <p class="event-description" style="margin:0;font-size:0.95rem;">${ev.description}</p>
+                </div>
+                <div class="event-actions">
+                    <a href="event-registration.html?event=${ev.id}" class="btn btn-primary btn-glow" style="flex:2;">Register Now</a>
+                    <button class="btn btn-secondary" style="flex:1;" title="View details"><i class='bx bx-info-circle'></i></button>
+                </div>`;
+            return div;
+        }
+
+        async function fetchDashboardEvents() {
+            const grid = document.getElementById('events-grid');
+            try {
+                const res = await fetch(`${API_BASE}/api/events`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const events = await res.json();
+                grid.innerHTML = '';
+                if (events.length === 0) {
+                    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#94a3b8;padding:4rem;">No events found.</p>';
+                    return;
+                }
+                events.forEach(ev => grid.appendChild(buildEventCard(ev)));
+            } catch (err) {
+                console.warn('Could not fetch events from backend:', err.message);
+                grid.innerHTML = `
+                    <div style="grid-column:1/-1;text-align:center;padding:3rem;color:#94a3b8;">
+                        <i class='bx bx-error-circle' style="font-size:3rem;display:block;margin-bottom:1rem;color:#f87171;"></i>
+                        <p>Could not load events from server.</p>
+                        <p style="font-size:0.85rem;margin-top:0.5rem;">Make sure the backend is running: <code style="color:#a855f7;">cd server && node index.js</code></p>
+                    </div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = checkAuth();
+            if (userData) {
+                const userNameElement = document.querySelector('#user-info #user-name');
+                const userCollegeElement = document.querySelector('#user-info #user-college');
+
+                if (userNameElement) userNameElement.textContent = userData.name;
+                if (userCollegeElement) userCollegeElement.textContent = userData.college;
+
+                const logoutLink = document.getElementById('logout-link');
+                if(logoutLink) {
+                    logoutLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        localStorage.removeItem('keralaEventsUser');
+                        window.location.href = 'index.html';
+                    });
+                }
+
+                fetchDashboardEvents();
+            }
+        });
+    </script>
+</body>
+</html>

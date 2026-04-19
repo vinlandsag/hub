@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Kerala Events Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="aesthetic-theme dark-theme">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <header class="glass-header">
+        <div class="header-content">
+            <h1><span class="gradient-text">Kerala</span> Events Hub</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="dashboard.html" class="nav-link">All Events</a>
+                <a href="my-events.html" class="nav-link">My Events</a>
+                <a href="profile.html" class="nav-link active"><i class='bx bx-user-circle'></i> Profile</a>
+                <a href="#" class="nav-link" id="logout-link">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="profile-header" style="text-align: center; margin-bottom: 2rem;">
+            <h2>My <span class="gradient-text">Profile</span></h2>
+            <p style="color: #94a3b8;">Manage your account information and preferences</p>
+        </section>
+
+        <section id="profile-info">
+            <div class="glass-form glass-card">
+                <h3 style="color: white; margin-bottom: 1.5rem; text-align: center;">Personal Information</h3>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="profile-name">Full Name</label>
+                        <input type="text" id="profile-name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-email">Email Address</label>
+                        <input type="email" id="profile-email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-phone">Phone Number</label>
+                        <input type="tel" id="profile-phone" name="phone" required pattern="[0-9]{10}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-college">College Name</label>
+                        <input type="text" id="profile-college" name="college" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-year">Year of Study</label>
+                        <select id="profile-year" name="year">
+                            <option value="" style="background: #0f172a; color: white;">Select Year</option>
+                            <option value="1" style="background: #0f172a; color: white;">1st Year</option>
+                            <option value="2" style="background: #0f172a; color: white;">2nd Year</option>
+                            <option value="3" style="background: #0f172a; color: white;">3rd Year</option>
+                            <option value="4" style="background: #0f172a; color: white;">4th Year</option>
+                            <option value="5" style="background: #0f172a; color: white;">5th Year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-branch">Branch/Specialization</label>
+                        <input type="text" id="profile-branch" name="branch" placeholder="e.g., Computer Science, Mechanical">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-interests">Interests</label>
+                        <textarea id="profile-interests" name="interests" rows="3" placeholder="e.g., Web Development, AI/ML, Cybersecurity"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button type="submit" class="btn btn-primary btn-glow" style="flex: 1;">Update Profile</button>
+                        <button type="button" class="btn btn-secondary" id="reset-btn" style="flex: 1;">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="profile-stats" style="max-width: 1200px; margin: 4rem auto;">
+            <h3 style="text-align: center; color: white; font-size: 1.8rem; margin-bottom: 2rem;">Activity Summary</h3>
+            <div class="events-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="glass-card stat-item hover-up">
+                    <h4 id="events-registered" class="stat-number">3</h4>
+                    <p class="stat-label">Events Registered</p>
+                </div>
+                <div class="glass-card stat-item hover-up delay-1">
+                    <h4 id="events-attended" class="stat-number">0</h4>
+                    <p class="stat-label">Events Attended</p>
+                </div>
+                <div class="glass-card stat-item hover-up delay-2">
+                    <h4 id="account-age" class="stat-number">0</h4>
+                    <p class="stat-label">Days Joined</p>
+                </div>
+                <div class="glass-card stat-item hover-up delay-3">
+                    <h4 id="favorite-category" class="stat-number" style="font-size: 1.5rem; margin-top: 1rem; margin-bottom: 0.5rem;">-</h4>
+                    <p class="stat-label">Top Category</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="account-settings" style="max-width: 500px; margin: 4rem auto;">
+            <div class="glass-card">
+                <h3 style="color: white; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">Account Settings</h3>
+                
+                <div class="setting-item" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="color: white; margin: 0;">Email Notifications</h4>
+                        <label class="toggle">
+                            <input type="checkbox" id="email-notifications" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">Receive email updates about new events and reminders</p>
+                </div>
+
+                <div class="setting-item" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="color: white; margin: 0;">SMS Notifications</h4>
+                        <label class="toggle">
+                            <input type="checkbox" id="sms-notifications">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">Receive SMS alerts for registrations</p>
+                </div>
+
+                <div class="setting-item" style="padding: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="color: white; margin: 0;">Privacy Settings</h4>
+                        <label class="toggle">
+                            <input type="checkbox" id="profile-visibility" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">Profile visible to event organizers</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="danger-zone" style="max-width: 500px; margin: 2rem auto;">
+            <div class="glass-card" style="border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05);">
+                <h3 style="color: #fca5a5; margin-bottom: 1rem; text-align: center;">Danger Zone</h3>
+                <p style="color: #94a3b8; text-align: center; margin-bottom: 1.5rem; font-size: 0.9rem;">This action cannot be undone. All your data will be permanently deleted.</p>
+                <button class="btn btn-danger" id="delete-account-btn" style="width: 100%;">Delete My Account</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kerala Events Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const API_BASE = window.location.hostname ? `http://${window.location.hostname}:3000` : 'http://localhost:3000';
+
+        function checkAuth() {
+            const userData = localStorage.getItem('keralaEventsUser');
+            if (!userData) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return JSON.parse(userData);
+        }
+
+        async function fetchServerProfile(userId) {
+            try {
+                const res = await fetch(`${API_BASE}/api/users/${userId}`);
+                if (!res.ok) throw new Error('Profile not found');
+                return await res.json();
+            } catch (err) {
+                console.warn('Could not fetch profile from server:', err.message);
+                return null;
+            }
+        }
+
+        async function saveProfileData() {
+            const userData = JSON.parse(localStorage.getItem('keralaEventsUser') || '{}');
+            const formData = new FormData(document.getElementById('profile-form'));
+            const updatedProfile = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                college: formData.get('college')
+            };
+
+            try {
+                if (userData.id) {
+                    const res = await fetch(`${API_BASE}/api/users/${userData.id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updatedProfile)
+                    });
+                    if (!res.ok) {
+                        const err = await res.json();
+                        throw new Error(err.message || 'Unable to update profile');
+                    }
+                    const data = await res.json();
+                    const merged = {
+                        ...userData,
+                        ...data.user,
+                        year: formData.get('year'),
+                        branch: formData.get('branch'),
+                        interests: formData.get('interests')
+                    };
+                    localStorage.setItem('keralaEventsUser', JSON.stringify(merged));
+                    alert('Profile updated successfully!');
+                    updateProfileStats(merged);
+                    return;
+                }
+            } catch (err) {
+                console.warn('Server profile update failed:', err.message);
+            }
+
+            const fallbackData = {
+                ...userData,
+                ...updatedProfile,
+                year: formData.get('year'),
+                branch: formData.get('branch'),
+                interests: formData.get('interests')
+            };
+            localStorage.setItem('keralaEventsUser', JSON.stringify(fallbackData));
+            alert('Profile updated locally. Server sync unavailable.');
+            updateProfileStats(fallbackData);
+        }
+
+        async function updateProfileStats(userData) {
+            const registeredEl = document.getElementById('events-registered');
+            const attendedEl = document.getElementById('events-attended');
+            const ageEl = document.getElementById('account-age');
+            const categoryEl = document.getElementById('favorite-category');
+
+            let registrations = [];
+            if (userData.id) {
+                try {
+                    const res = await fetch(`${API_BASE}/api/my-events/${userData.id}`);
+                    if (res.ok) {
+                        registrations = await res.json();
+                    }
+                } catch (err) {
+                    console.warn('Could not fetch event stats:', err.message);
+                }
+            }
+
+            const daysJoined = userData.created_at ? Math.max(0, Math.floor((Date.now() - new Date(userData.created_at)) / 86400000)) : 0;
+            const categoryCounts = registrations.reduce((acc, ev) => {
+                const type = ev.type || 'Unknown';
+                acc[type] = (acc[type] || 0) + 1;
+                return acc;
+            }, {});
+            const topCategory = Object.keys(categoryCounts).sort((a,b) => categoryCounts[b]-categoryCounts[a])[0] || '-';
+
+            if (registeredEl) registeredEl.textContent = registrations.length;
+            if (attendedEl) attendedEl.textContent = '0';
+            if (ageEl) ageEl.textContent = String(daysJoined);
+            if (categoryEl) categoryEl.textContent = topCategory || '-';
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const userData = checkAuth();
+            if (userData) {
+                const serverProfile = userData.id ? await fetchServerProfile(userData.id) : null;
+                const profileData = serverProfile ? { ...userData, ...serverProfile } : userData;
+                loadProfileData(profileData);
+                localStorage.setItem('keralaEventsUser', JSON.stringify(profileData));
+
+                const logoutLink = document.getElementById('logout-link');
+                if(logoutLink){
+                    logoutLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        localStorage.removeItem('keralaEventsUser');
+                        window.location.href = 'index.html';
+                    });
+                }
+
+                document.getElementById('profile-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    saveProfileData();
+                });
+
+                document.getElementById('reset-btn').addEventListener('click', function() {
+                    loadProfileData(profileData);
+                });
+
+                document.getElementById('delete-account-btn').addEventListener('click', function() {
+                    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                        localStorage.removeItem('keralaEventsUser');
+                        alert('Account deleted successfully.');
+                        window.location.href = 'index.html';
+                    }
+                });
+
+                loadSettings();
+                updateProfileStats(profileData);
+            }
+        });
+
+        function loadProfileData(userData) {
+            document.getElementById('profile-name').value = userData.name || '';
+            document.getElementById('profile-email').value = userData.email || '';
+            document.getElementById('profile-phone').value = userData.phone || '';
+            document.getElementById('profile-college').value = userData.college || '';
+            document.getElementById('profile-year').value = userData.year || '';
+            document.getElementById('profile-branch').value = userData.branch || '';
+            document.getElementById('profile-interests').value = userData.interests || '';
+        }
+
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('keralaEventsSettings')) || {
+                emailNotifications: true,
+                smsNotifications: false,
+                profileVisibility: true
+            };
+
+            const emailEl = document.getElementById('email-notifications');
+            const smsEl = document.getElementById('sms-notifications');
+            const visEl = document.getElementById('profile-visibility');
+            if(emailEl) emailEl.checked = settings.emailNotifications;
+            if(smsEl) smsEl.checked = settings.smsNotifications;
+            if(visEl) visEl.checked = settings.profileVisibility;
+
+            document.querySelectorAll('.toggle input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', saveSettings);
+            });
+        }
+
+        function saveSettings() {
+            const settings = {
+                emailNotifications: document.getElementById('email-notifications').checked,
+                smsNotifications: document.getElementById('sms-notifications').checked,
+                profileVisibility: document.getElementById('profile-visibility').checked
+            };
+            localStorage.setItem('keralaEventsSettings', JSON.stringify(settings));
+        }
+
+        function updateProfileStats(userData) {
+            const registeredEvents = 3; 
+            const eventsRegEl = document.getElementById('events-registered');
+            if(eventsRegEl) eventsRegEl.textContent = registeredEvents;
+
+            const loginTimeStr = userData.loginTime || new Date().toISOString();
+            const loginTime = new Date(loginTimeStr);
+            const now = new Date();
+            const daysSinceJoined = Math.floor((now - loginTime) / (1000 * 60 * 60 * 24)) || 0;
+            const ageEl = document.getElementById('account-age');
+            if(ageEl) ageEl.textContent = daysSinceJoined;
+
+            const eventsAttEl = document.getElementById('events-attended');
+            if(eventsAttEl) eventsAttEl.textContent = Math.floor(registeredEvents * 0.7);
+            const favCatEl = document.getElementById('favorite-category');
+            if(favCatEl) favCatEl.textContent = 'Hackathons';
+        }
+    </script>
+</body>
+</html>

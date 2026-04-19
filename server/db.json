@@ -1,0 +1,110 @@
+{
+  "colleges": [
+    {
+      "id": 1,
+      "name": "College of Engineering Trivandrum",
+      "district": "Thiruvananthapuram",
+      "latitude": 8.5276,
+      "longitude": 76.9366
+    },
+    {
+      "id": 2,
+      "name": "Government Engineering College Thrissur",
+      "district": "Thrissur",
+      "latitude": 10.5211,
+      "longitude": 76.2239
+    },
+    {
+      "id": 3,
+      "name": "Rajagiri School of Engineering & Technology",
+      "district": "Ernakulam",
+      "latitude": 10.0043,
+      "longitude": 76.3165
+    },
+    {
+      "id": 4,
+      "name": "Test College",
+      "district": null,
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "id": 5,
+      "name": "Cghg",
+      "district": null,
+      "latitude": null,
+      "longitude": null
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Test User",
+      "email": "test@example.com",
+      "phone": "9876543210",
+      "college": "Test College",
+      "created_at": "2026-04-19T10:03:07.818Z"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Code Wars 2.0",
+      "type": "hackathon",
+      "description": "A 24-hour coding event.",
+      "date": "2024-08-25",
+      "host_college_id": 1,
+      "registration_link": "https://example.com/register-codewars",
+      "created_at": "2026-04-19T09:57:55.770Z"
+    },
+    {
+      "id": 2,
+      "title": "AI/ML Bootcamp",
+      "type": "workshop",
+      "description": "A beginner-friendly ML workshop.",
+      "date": "2024-09-02",
+      "host_college_id": 3,
+      "registration_link": "https://example.com/register-aiml",
+      "created_at": "2026-04-19T09:57:55.771Z"
+    },
+    {
+      "id": 3,
+      "title": "Flutter Fest",
+      "type": "workshop",
+      "description": "Build cross-platform apps with Flutter.",
+      "date": "2024-08-30",
+      "host_college_id": 1,
+      "registration_link": "https://example.com/register-flutter",
+      "created_at": "2026-04-19T09:57:55.771Z"
+    },
+    {
+      "id": 4,
+      "title": "Future of Web Development",
+      "type": "talk",
+      "description": "Explore emerging trends in web development including Web3, PWAs, and modern frameworks.",
+      "date": "2024-09-05",
+      "host_college_id": 1,
+      "registration_link": "https://example.com/register-webdev",
+      "created_at": "2026-04-19T09:57:55.771Z"
+    },
+    {
+      "id": 5,
+      "title": "nhfjhf",
+      "type": "hackathon",
+      "description": "ngcncnc",
+      "date": "2026-04-30",
+      "host_college_id": 5,
+      "registration_link": null,
+      "created_at": "2026-04-19T10:16:31.382Z"
+    }
+  ],
+  "registrations": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "event_id": 1,
+      "registered_at": "2026-04-19T10:03:19.025Z",
+      "status": "confirmed"
+    }
+  ]
+}

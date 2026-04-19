@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Portal - Kerala Events Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="aesthetic-theme dark-theme">
+    <div class="glow-orb orb-1" style="background:#06b6d4;"></div>
+    <div class="glow-orb orb-2" style="background:#3b82f6;"></div>
+
+    <header class="glass-header">
+        <div class="header-content">
+            <h1><span class="gradient-text">Kerala</span> Events Hub</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="college-login.html" class="nav-link active">College Portal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="college-auth" class="glass-form glass-card">
+            <h2>College <span class="gradient-text">Portal</span></h2>
+            <p>Login to post new events and manage registrations for your institution.</p>
+            
+            <form id="college-login-form" action="event-upload.html" method="get">
+                <div class="form-group">
+                    <label for="college-id">College ID / Email</label>
+                    <input type="text" id="college-id" required placeholder="Enter official college ID">
+                </div>
+                <div class="form-group">
+                    <label for="college-password">Password</label>
+                    <input type="password" id="college-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-glow" style="width:100%; margin-top:1rem;">Login to Portal <i class='bx bx-log-in'></i></button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kerala Events Hub. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const API_BASE = window.location.hostname ? `http://${window.location.hostname}:3000` : 'http://localhost:3000';
+
+        document.getElementById('college-login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const email    = document.getElementById('college-id').value.trim();
+            const password = document.getElementById('college-password').value;
+            const submitBtn = this.querySelector('button[type="submit"]');
+
+            if (!email || !password) {
+                alert('Please enter your college ID and password.');
+                return;
+            }
+
+            submitBtn.textContent = 'Logging in...';
+            submitBtn.disabled = true;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/college-login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    localStorage.setItem('keralaCollegeSession', JSON.stringify(data.college));
+                    window.location.href = 'event-upload.html';
+                } else {
+                    const err = await res.json();
+                    alert(`❌ Login failed: ${err.message}`);
+                }
+            } catch (error) {
+                console.error('College login error:', error);
+                // Fallback: allow access offline using the entered ID as college name
+                alert('⚠️ Could not reach server. Continuing in offline mode.\n\nDefault password is: college123');
+                const collegeName = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                localStorage.setItem('keralaCollegeSession', JSON.stringify({ email, name: collegeName }));
+                window.location.href = 'event-upload.html';
+            } finally {
+                submitBtn.textContent = 'Login to Portal ➜';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

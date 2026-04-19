@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Kerala Events Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="aesthetic-theme dark-theme">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <header class="glass-header">
+        <div class="header-content">
+            <h1><span class="gradient-text">Kerala</span> Events Hub</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="college-login.html" class="nav-link">College Portal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="max-width: 1200px; margin: 0 auto; padding: 3rem 2rem;">
+        <section id="login-form" class="glass-form glass-card hover-up" style="margin: 2rem auto 4rem; max-width: 550px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.05) 100%); border: 1px solid rgba(168, 85, 247, 0.2); padding: 3.5rem 3rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+            <div style="text-align: center; margin-bottom: 0.5rem;">
+                <i class='bx bx-user-plus' style="font-size: 3rem; color: #a855f7; margin-bottom: 1rem; display: block;"></i>
+            </div>
+            <h2 style="font-size: 2.2rem; text-align: center; margin-bottom: 0.5rem;">Join <span class="gradient-text">Kerala Events Hub</span></h2>
+            <p style="text-align: center; color: #94a3b8; margin-bottom: 2.5rem; font-size: 1.05rem;">Enter your details to discover amazing tech events near your college</p>
+
+            <form>
+                <div class="form-group">
+                    <label for="name">Full Name <span style="color: #ec4899;">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe" style="transition: all 0.3s ease;">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="9876543210">
+                </div>
+
+                <div class="form-group">
+                    <label for="college">College Name <span style="color: #ec4899;">*</span></label>
+                    <input type="text" id="college" name="college" required list="colleges" placeholder="Start typing your college...">
+                    <datalist id="colleges">
+                        <option value="College of Engineering Trivandrum">
+                        <option value="Government Engineering College Thrissur">
+                        <option value="Mar Athanasius College of Engineering">
+                        <option value="Rajagiri School of Engineering & Technology">
+                        <option value="Federal Institute of Science And Technology">
+                        <option value="SCMS School of Engineering and Technology">
+                        <option value="Saintgits College of Engineering">
+                        <option value="Jyothi Engineering College">
+                        <option value="Vidya Academy of Science and Technology">
+                        <option value="Musaliar College of Engineering and Technology">
+                        <option value="TKM College of Engineering">
+                        <option value="NSS College of Engineering">
+                        <option value="College of Engineering Chengannur">
+                        <option value="Government Engineering College Kozhikode">
+                        <option value="Government Engineering College Palakkad">
+                        <option value="St.Joseph College of Engineering and Technology, Palai">
+                    </datalist>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-glow" style="width: 100%; margin-top: 1.5rem; padding: 1rem 1.8rem; font-size: 1.05rem; font-weight: 600;">Explore Events <i class='bx bx-right-arrow-alt' style="margin-left: 0.5rem;"></i></button>
+            </form>
+
+            <p class="note" style="color: #64748b; font-size: 0.9rem; margin-top: 1.8rem; text-align: center;">✓ Your college location helps us find nearby events and build a stronger community.</p>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kerala Events Hub. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        const API_BASE = window.location.hostname ? `http://${window.location.hostname}:3000` : 'http://localhost:3000';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const formEl = document.querySelector('#login-form form');
+            const submitBtn = formEl ? formEl.querySelector('button[type="submit"]') : null;
+            if (!formEl) return console.error('Login form not found');
+
+            formEl.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const name    = document.querySelector('#name').value.trim();
+                const email   = document.querySelector('#email').value.trim();
+                const phone   = document.querySelector('#phone').value.trim();
+                const college = document.querySelector('#college').value.trim();
+
+                if (!name || !college) {
+                    alert('Please fill in your name and college.');
+                    return;
+                }
+
+                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                if (submitBtn) {
+                    submitBtn.textContent = 'Connecting...';
+                    submitBtn.disabled = true;
+                }
+
+                try {
+                    // Try to register first
+                    const regRes = await fetch(`${API_BASE}/api/register`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email: email || `${name.toLowerCase().replace(/\s+/g,'')}_${Date.now()}@placeholder.local`, phone: phone || '0000000000', college })
+                    });
+
+                    let userData;
+
+                    if (regRes.ok) {
+                        const data = await regRes.json();
+                        userData = data.user;
+                    } else if (regRes.status === 409 && email) {
+                        // Already registered — log in
+                        const loginRes = await fetch(`${API_BASE}/api/login`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email })
+                        });
+                        if (loginRes.ok) {
+                            const data = await loginRes.json();
+                            userData = data.user;
+                        } else {
+                            const err = await loginRes.json();
+                            throw new Error(err.message || 'Login failed');
+                        }
+                    } else {
+                        const err = await regRes.json();
+                        throw new Error(err.message || 'Registration failed');
+                    }
+
+                    localStorage.setItem('keralaEventsUser', JSON.stringify(userData));
+                    window.location.href = './dashboard.html';
+
+                } catch (error) {
+                    console.error('Auth error:', error);
+                    // Fallback: save locally and continue so app still works offline
+                    alert(`Could not reach server (${error.message}). Saving locally and continuing.`);
+                    localStorage.setItem('keralaEventsUser', JSON.stringify({ name, email: email || null, phone: phone || null, college }));
+                    window.location.href = './dashboard.html';
+                } finally {
+                    if (submitBtn) {
+                        submitBtn.textContent = 'Explore Events ➜';
+                        submitBtn.disabled = false;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

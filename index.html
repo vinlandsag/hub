@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Events Hub - Discover Tech Events & Hackathons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="aesthetic-theme dark-theme">
+    <!-- Background glowing orbs -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <header class="glass-header">
+        <div class="header-content">
+            <h1><span class="gradient-text">Kerala</span> Events Hub</h1>
+            <nav>
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="login.html" class="nav-link">Login</a>
+                <a href="college-login.html" class="btn btn-primary btn-glow btn-nav">College Portal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="glass-section hero-section">
+            <div class="hero-content">
+                <div class="badge">🚀 Over 200+ Events Monthly</div>
+                <h2 class="hero-title">Empower Your <br><span class="gradient-text">Tech Journey</span></h2>
+                <p class="hero-subtitle">Find hackathons, workshops, and tech events at colleges near you. Equal opportunities for all students across Kerala.</p>
+                <div class="hero-cta">
+                    <a href="login.html" class="btn btn-primary btn-glow">Start Exploring <i class='bx bx-right-arrow-alt'></i></a>
+                    <a href="#features" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- Floating glass styling to show events -->
+                <div class="glass-card floating-card">
+                    <div class="card-header">
+                        <i class='bx bx-code-alt'></i> Upcoming Hackathon
+                    </div>
+                    <div class="card-body">
+                        <h4>Kochi AI Summit</h4>
+                        <p>📍 Maker Village, Kochi</p>
+                        <p class="date">Starts in 2 days</p>
+                    </div>
+                </div>
+                <div class="glass-card floating-card delay-1">
+                    <div class="card-header">
+                        <i class='bx bx-rocket'></i> Workshop
+                    </div>
+                    <div class="card-body">
+                        <h4>Web3 Bootcamp</h4>
+                        <p>📍 CET Trivandrum</p>
+                        <p class="date">Next week</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats-banner" class="stats-glass">
+            <div class="stats-container banner-glow hover-up">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Colleges</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">200+</span>
+                    <span class="stat-label">Events Monthly</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10k+</span>
+                    <span class="stat-label">Students</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <h2 class="section-title">Why Choose <span class="gradient-text">Us?</span></h2>
+            <div class="feature-grid">
+                <div class="feature-card event-card glass-card hover-up">
+                    <div class="feature-icon user-icon-float"><i class='bx bx-map-pin'></i></div>
+                    <h3>Nearby Events</h3>
+                    <p>Discover events at colleges close to your location instantly.</p>
+                </div>
+                <div class="feature-card event-card glass-card hover-up delay-1">
+                    <div class="feature-icon user-icon-float"><i class='bx bx-target-lock'></i></div>
+                    <h3>Personalized Feed</h3>
+                    <p>Get recommendations tailored to your college and interests.</p>
+                </div>
+                <div class="feature-card event-card glass-card hover-up delay-2">
+                    <div class="feature-icon user-icon-float"><i class='bx bx-network-chart'></i></div>
+                    <h3>College Network</h3>
+                    <p>Connect seamlessly with students and events across Kerala.</p>
+                </div>
+                <div class="feature-card event-card glass-card hover-up delay-3">
+                    <div class="feature-icon user-icon-float"><i class='bx bx-calendar-event'></i></div>
+                    <h3>Stay Updated</h3>
+                    <p>Never miss out on important hackathons, seminars, and workshops.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section">
+            <div class="glass-card cta-card banner-glow hover-up">
+                <h2>Ready to boost your tech journey?</h2>
+                <p>Join thousands of students from across Kerala's top engineering colleges.</p>
+                <div class="cta-buttons">
+                    <a href="login.html" class="btn btn-primary btn-glow">Create Your Profile</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3><span class="gradient-text">Kerala</span> Events Hub</h3>
+                <p>Empowering students across Kerala.</p>
+            </div>
+            <div class="footer-links">
+                <a href="college-login.html" class="college-login-link">College Portal Login</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kerala Events Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Redirect to dashboard if already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('keralaEventsUser');
+            if (userData) {
+                const loginLinks = document.querySelectorAll('a[href="login.html"]');
+                loginLinks.forEach(link => {
+                    if(link.classList.contains('btn-nav')) {
+                        link.textContent = 'Dashboard';
+                    } else if (link.classList.contains('btn-primary')) {
+                        link.textContent = 'Go to Dashboard';
+                    } else {
+                        link.textContent = 'Dashboard';
+                    }
+                    link.href = 'dashboard.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

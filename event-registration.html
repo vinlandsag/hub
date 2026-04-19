@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration - Kerala Events Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="aesthetic-theme dark-theme">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <header class="glass-header">
+        <div class="header-content">
+            <h1><span class="gradient-text">Kerala</span> Events Hub</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="dashboard.html" class="nav-link active">All Events</a>
+                <a href="my-events.html" class="nav-link">My Events</a>
+                <a href="profile.html" class="nav-link"><i class='bx bx-user-circle'></i> Profile</a>
+                <a href="#" class="nav-link" id="logout-link">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; gap: 2rem;">
+        <section id="event-details" class="glass-card" style="max-width: 800px; margin: 0 auto; padding: 2.5rem;">
+            <h2 id="event-title" style="text-align: center; color: white; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">Code Wars 2.0</h2>
+            <div class="event-info" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div class="event-meta" style="color: #94a3b8; line-height: 1.8;">
+                    <p><i class='bx bx-buildings'></i> <strong style="color: #cbd5e1; display: inline-block; width: 100px;">College:</strong> <span id="event-college">Federal Institute of Science And Technology</span></p>
+                    <p><i class='bx bx-calendar'></i> <strong style="color: #cbd5e1; display: inline-block; width: 100px;">Date:</strong> <span id="event-date">March 25, 2026</span></p>
+                    <p><i class='bx bx-time-five'></i> <strong style="color: #cbd5e1; display: inline-block; width: 100px;">Time:</strong> <span id="event-time">9:00 AM - 9:00 PM</span></p>
+                    <p><i class='bx bx-map'></i> <strong style="color: #cbd5e1; display: inline-block; width: 100px;">Venue:</strong> <span id="event-venue">FISAT Main Auditorium</span></p>
+                    <p><i class='bx bx-category'></i> <strong style="color: #cbd5e1; display: inline-block; width: 100px;">Type:</strong> <span id="event-type" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; padding: 0.2rem 0.6rem; border-radius: 4px;">Hackathon</span></p>
+                </div>
+                <div class="event-description" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem;">
+                    <h3 style="color: white; margin-bottom: 0.5rem;"><i class='bx bx-info-circle'></i> Description</h3>
+                    <p id="event-description" style="color: #94a3b8; line-height: 1.6;">A 24-hour coding competition featuring challenges in algorithms, web development, and machine learning.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="registration-form" class="glass-form glass-card" style="margin: 0 auto; width: 100%;">
+            <h2>Register for <span class="gradient-text">Event</span></h2>
+            <form id="event-reg-form">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" name="email" placeholder="example@gmail.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-phone">Phone Number</label>
+                    <input type="tel" id="reg-phone" name="phone" placeholder="1234567890" pattern="[0-9]{10}">
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-college">College</label>
+                    <input type="text" id="reg-college" name="college" required>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="reg-year">Year of Study</label>
+                        <select id="reg-year" name="year" required>
+                            <option value="" style="background: #0f172a; color: white;">Select</option>
+                            <option value="1" style="background: #0f172a; color: white;">1st Year</option>
+                            <option value="2" style="background: #0f172a; color: white;">2nd Year</option>
+                            <option value="3" style="background: #0f172a; color: white;">3rd Year</option>
+                            <option value="4" style="background: #0f172a; color: white;">4th Year</option>
+                            <option value="5" style="background: #0f172a; color: white;">5th Year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="flex: 2;">
+                        <label for="reg-branch">Branch/Specialization</label>
+                        <input type="text" id="reg-branch" name="branch" placeholder="e.g., Computer Science">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label class="checkbox-container" style="display: flex; gap: 10px; align-items: start; color: #94a3b8; font-weight: normal; cursor: pointer;">
+                        <input type="checkbox" id="reg-terms" name="terms" required style="width: auto; margin-top: 4px;">
+                        <span>I agree to the terms and conditions and understand the event guidelines.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-glow" style="width: 100%; margin-top: 1.5rem;">Complete Registration <i class='bx bx-check-double'></i></button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kerala Events Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function checkAuth() {
+            const userData = localStorage.getItem('keralaEventsUser');
+            if (!userData) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return JSON.parse(userData);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = checkAuth();
+            if (userData) {
+                const nameField = document.getElementById('reg-name');
+                const emailField = document.getElementById('reg-email');
+                const phoneField = document.getElementById('reg-phone');
+                const collegeField = document.getElementById('reg-college');
+
+                if (nameField) nameField.value = userData.name || '';
+                if (emailField) emailField.value = userData.email || '';
+                if (phoneField) phoneField.value = userData.phone || '';
+                if (collegeField) collegeField.value = userData.college || '';
+
+                const logoutLink = document.getElementById('logout-link');
+                if(logoutLink){
+                    logoutLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        localStorage.removeItem('keralaEventsUser');
+                        window.location.href = 'index.html';
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

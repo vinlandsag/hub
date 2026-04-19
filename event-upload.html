@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Event - Kerala Events Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="aesthetic-theme dark-theme">
+    <div class="glow-orb orb-1" style="background:#f43f5e;"></div>
+    <div class="glow-orb orb-2" style="background:#eab308;"></div>
+
+    <header class="glass-header">
+        <div class="header-content">
+            <h1><span class="gradient-text">Kerala</span> Events Hub</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="college-login.html" class="nav-link">College Portal</a>
+                <a href="event-upload.html" class="nav-link active">Upload Event</a>
+                <a href="index.html" class="nav-link" id="logout-link">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="upload-event-section" class="glass-form glass-card" style="max-width: 650px;">
+            <h2>Post a <span class="gradient-text">New Event</span></h2>
+            <p>Publish workshops, hackathons, and talks to the dashboard seamlessly.</p>
+            
+            <form id="event-upload-form">
+                <div class="form-group">
+                    <label for="new-event-title">Event Title</label>
+                    <input type="text" id="new-event-title" required placeholder="e.g., Tech-X 2026">
+                </div>
+
+                <div class="form-group">
+                    <label for="new-event-type">Event Type</label>
+                    <select id="new-event-type" required>
+                        <option value="" style="background: #0f172a; color: white;">Select Type</option>
+                        <option value="hackathon" style="background: #0f172a; color: white;">Hackathon</option>
+                        <option value="workshop" style="background: #0f172a; color: white;">Workshop</option>
+                        <option value="talk" style="background: #0f172a; color: white;">Tech Talk</option>
+                        <option value="competition" style="background: #0f172a; color: white;">Competition</option>
+                    </select>
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="new-event-date">Date</label>
+                        <input type="date" id="new-event-date" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="new-event-time">Time</label>
+                        <input type="time" id="new-event-time" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="new-event-venue">Venue</label>
+                    <input type="text" id="new-event-venue" required placeholder="e.g., Main Auditorium">
+                </div>
+
+                <div class="form-group">
+                    <label for="new-event-desc">Description</label>
+                    <textarea id="new-event-desc" rows="4" required placeholder="Describe the event, rules, and prizes..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="new-event-image">Event Poster (URL)</label>
+                    <input type="url" id="new-event-image" placeholder="https://example.com/poster.jpg">
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary btn-glow" style="flex: 1;">Publish Event</button>
+                    <a href="college-login.html" class="btn btn-secondary" style="flex: 1;">Cancel</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kerala Events Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = window.location.hostname ? `http://${window.location.hostname}:3000` : 'http://localhost:3000';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check college session
+            const collegeSession = localStorage.getItem('keralaCollegeSession');
+            if (!collegeSession) {
+                window.location.href = 'college-login.html';
+                return;
+            }
+            const college = JSON.parse(collegeSession);
+
+            // Show which college is logged in
+            const header = document.querySelector('#upload-event-section h2');
+            if (header && college.name) {
+                header.insertAdjacentHTML('afterend',
+                    `<p style="color:#a855f7;font-size:0.95rem;margin-bottom:1.5rem;"><i class='bx bx-buildings'></i> Posting as: <strong style="color:white;">${college.name}</strong></p>`
+                );
+            }
+
+            // Handle logout
+            const logoutLink = document.getElementById('logout-link');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('keralaCollegeSession');
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+
+        document.getElementById('event-upload-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button[type="submit"]');
+
+            const college = JSON.parse(localStorage.getItem('keralaCollegeSession') || '{}');
+            const college_name = college.name || 'Unknown College';
+
+            const title       = document.getElementById('new-event-title').value.trim();
+            const type        = document.getElementById('new-event-type').value;
+            const date        = document.getElementById('new-event-date').value;
+            const description = document.getElementById('new-event-desc').value.trim();
+            const image       = document.getElementById('new-event-image').value.trim();
+
+            if (!title || !type || !date || !description) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            submitBtn.textContent = 'Publishing...';
+            submitBtn.disabled = true;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/events`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, type, description, date, college_name, registration_link: image || null })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    alert(`✅ Event "${data.event.title}" published successfully to the dashboard!`);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    const err = await res.json();
+                    alert(`❌ Failed to publish: ${err.message}`);
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert('⚠️ Could not reach the server. Make sure the backend is running.\n\nRun: cd server && node index.js');
+            } finally {
+                submitBtn.textContent = 'Publish Event';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
